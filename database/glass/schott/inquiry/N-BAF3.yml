@@ -3,7 +3,7 @@
 # If a copy of the LGPL was not distributed with this file, you can obtain one at http://www.gnu.org/licenses/lgpl
 
 REFERENCES: "1) <a href=\"http://refractiveindex.info/download/data/2012/schott_optical_glass_collection_data_inquiry_glass_may_2012_us\">SCHOTT optical glass data sheets - inqiury glass 2012-05-03</a><br>2) <a href=\"http://refractiveindex.info/download/data/2012/schottzemax-20121204.agf\">SCHOTT Zemax catalog 2012-12-04</a>"
-COMMENTS: "Inquiry glass. Refractive index is relative to air at standard conditions; Wavelength in dispersion formula is as measured in air and expressed in micrometers.
+COMMENTS: "Inquiry glass. Refractive index is relative to air at standard conditions; Wavelength in dispersion formula is as measured in air and expressed in micrometers."
 DATA:
   - type: formula 2
     range: 0.365 2.5

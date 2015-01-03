@@ -42,13 +42,26 @@ def formula_3(coeff,da_range,l):
 
 
 
+#Search for range with  nmin<n<nmax
+#return list suitable for broken_barh plot
 def searchMaterial(yamlFile,bookName,nmin,nmax):
 
+	#List for result
+	result=[]
+
 	#Function used only internally to display material parameters values	
+	#ATTENTION!!! comment is not only a comment is like command for this function (yes, it's dirty ;))
 	def printParams(paramsArray,paramList,comment):
 		for param in paramList:
 			sys.stdout.write(str(paramsArray[-1][param])+" ");
 		sys.stdout.write(comment+"\n");
+		if comment.find("start_range")!=-1:
+			printParams.lastStart=paramsArray[-1]["l"]
+		elif comment.find("end_range")!=-1:
+			result.append((printParams.lastStart,paramsArray[-1]["l"]))
+	printParams.lastStart=0;
+
+
 
 
 	#Just some boolen, if the firs element is OK it may not be shown
@@ -73,13 +86,13 @@ def searchMaterial(yamlFile,bookName,nmin,nmax):
 			try:
 				if (params[-1]["n"]>nmin and params[-1]["n"]<nmax) :
 					if my_range == False:
-						printParams(params,["l","n","k"],bookName+" start_range")
+						printParams(params,["l","n","k"],bookName+"_"+yamlFile+" start_range")
 					if print_in_my_range:
 						printParams(params,["l","n","k"],bookName+" inner_range tabulated nk")
 					my_range=True
 				else:
 					if my_range == True:
-						printParams(params,["l","n","k"],bookName+" end")
+						printParams(params,["l","n","k"],bookName+" end_range")
 					my_range=False
 			except TypeError:
 				#Do nothink, it's ok
@@ -152,6 +165,7 @@ def searchMaterial(yamlFile,bookName,nmin,nmax):
 			except TypeError:
 				#Do nothink, it's ok
 				sys.stderr.write( "TypeError in ("+yamlFile+"):"+str(params[-1])+". Line formula_3\n")
+	return result
 
 
 			
@@ -160,23 +174,48 @@ prefix="database/"
 lib=yaml.load(open(prefix+"library.yml",'r'))
 
 
+#List for resulted ranges
+resrange=[]
+#List for material names
+resnames=[]
+
 
 for schelf in lib:
 #	print schelf[0]
 #	print schelf
-	bookName="NoBookSet"
 	for materials in schelf["content"]:
-		for k,v in materials.iteritems():
-			if k=="BOOK":
-				bookName=v
+		bookName="NoBookSet"
+		if(materials.keys()[0]=="content"):
+			bookName=materials["BOOK"]
+			smallRes=[]	
+			for myFileIsIn in materials["content"]:
+				fileName=prefix+myFileIsIn["path"]
+				if bookName=="NoBookSet":
+					raise Exception("NoBookSet");
 
-			if k=="content":
-				matName=bookName
-				fileName=prefix+v[0]["path"]
+				result=searchMaterial(fileName,bookName,0,0.5)	
+				if len(result)>0:
+					for oneTuple in result:
+						smallRes.append(oneTuple)
+					if len(resnames)==0 or resnames[-1]!=bookName:
+						resnames.append(bookName)
+			if len(smallRes)>0:
+				resrange.append(smallRes)
 
-				searchMaterial(fileName,matName,0,1)	
 
 #		for material in materials["content"]:
 #			print material
 	print "\n\n"
+
+
+
+import pickle
+f=open("temporary-range-res.sav",'w')
+pickle.dump(resrange,f);
+f.close();
+
+f=open("temporary-names-res.sav",'w')
+pickle.dump(resnames,f);
+f.close();
+
 
