@@ -1,0 +1,10 @@
+# This file is part of refractiveindex.info database
+# refractiveindex.info database is subject to the terms of the GNU Lesser General Public License (LGPL) v.3
+# If a copy of the LGPL was not distributed with this file, you can obtain one at http://www.gnu.org/licenses/lgpl
+
+REFERENCES: "M.D. Ewbank et al.. The temperature dependence of optical and mechanical properties of Tl<sub>3</sub>AsSe<sub>3</sub>, <a href=\"http://dx.doi.org/10.1063/1.328128\"><i>J. Appl. Phys.</i> <b>51</b>, 3848-3852 (1980)</a>"
+COMMENTS: "Extraordinary ray (e)"
+DATA:
+  - type: formula 1
+    range: 2 12
+    coefficients: 0 8.993 0.444 0.308 25.0

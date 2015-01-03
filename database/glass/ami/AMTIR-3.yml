@@ -1,0 +1,9 @@
+# This file is part of refractiveindex.info database
+# refractiveindex.info database is subject to the terms of the GNU Lesser General Public License (LGPL) v.3
+# If a copy of the LGPL was not distributed with this file, you can obtain one at http://www.gnu.org/licenses/lgpl
+
+REFERENCES: "Handbook of Optics, Vol. 2, 2nd edition. McGraw-Hill 1994"
+DATA:
+  - type: formula 1
+    range: 3 14
+    coefficients: 0 5.8505 0.29192 1.4536 42.714

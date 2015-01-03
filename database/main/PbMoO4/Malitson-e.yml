@@ -1,0 +1,10 @@
+# This file is part of refractiveindex.info database
+# refractiveindex.info database is subject to the terms of the GNU Lesser General Public License (LGPL) v.3
+# If a copy of the LGPL was not distributed with this file, you can obtain one at http://www.gnu.org/licenses/lgpl
+
+REFERENCES: "I. H. Malitson, as cited in Handbook of Optics, 3rd edition, Vol. 4. McGraw-Hill 2009. Data fit by Handbook of Optics."
+COMMENTS: "Extraordinary ray (e)"
+DATA:
+  - type: formula 1
+    range: 0.44 1.08
+    coefficients: 0 3.52555 0.17950 0.20660 0.32537

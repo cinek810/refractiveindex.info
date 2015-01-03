@@ -1,0 +1,10 @@
+# This file is part of refractiveindex.info database
+# refractiveindex.info database is subject to the terms of the GNU Lesser General Public License (LGPL) v.3
+# If a copy of the LGPL was not distributed with this file, you can obtain one at http://www.gnu.org/licenses/lgpl
+
+REFERENCES: "<a href=\"http://pdf.directindustry.com/pdf/hikari-glass-22741.html\">Hikari Catalog</a>"
+COMMENTS: "Refractive index is relative to air at standard conditions; Wavelength in dispersion formula is as measured in air and expressed in micrometers"
+DATA:
+  - type: formula 3
+    range: 0.28 2.4
+    coefficients: 3.21588388 -1.33880786E-2 2 2.85023144E-2 -2 4.06364414E-4 -4 2.70180277E-5 -6 -4.64955706E-7 -8

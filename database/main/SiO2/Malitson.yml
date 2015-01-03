@@ -1,0 +1,10 @@
+# This file is part of refractiveindex.info database
+# refractiveindex.info database is subject to the terms of the GNU Lesser General Public License (LGPL) v.3
+# If a copy of the LGPL was not distributed with this file, you can obtain one at http://www.gnu.org/licenses/lgpl
+
+REFERENCES: "I. H. Malitson. Interspecimen Comparison of the Refractive Index of Fused Silica, <a href=\"http://dx.doi.org/10.1364/JOSA.55.001205\"><i>J. Opt. Soc. Am.</i> <b>55</b>, 1205-1208 (1965)</a>"
+COMMENTS: "Room temperature"
+DATA:
+  - type: formula 1
+    range: 0.21 3.71
+    coefficients: 0 0.6961663 0.0684043 0.4079426 0.1162414 0.8974794 9.896161

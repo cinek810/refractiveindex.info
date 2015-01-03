@@ -1,0 +1,10 @@
+# This file is part of refractiveindex.info database
+# refractiveindex.info database is subject to the terms of the GNU Lesser General Public License (LGPL) v.3
+# If a copy of the LGPL was not distributed with this file, you can obtain one at http://www.gnu.org/licenses/lgpl
+
+REFERENCES: "H. S. Shi, G. Zhang and H. Y. Shen. Measurement of principal refractive indices and the thermal refractive index coefficients of yttrium vanadate, <a href=\"http://caod.oriprobe.com/articles/3152847/Measurement_of_Principal_Refractive_Indices_and_the_Thermal_Refractive.htm\"><i>J. Synthetic Cryst.</i> <b>30</b>, 85–88 (2001)</a>, as cited in Handbook of Optics, 3rd edition, Vol. 4. McGraw-Hill 2009"
+COMMENTS: "Extraordinary ray (e)"
+DATA:
+  - type: formula 4
+    range: 0.48 1.34
+    coefficients: 4.607200 0.108087 0 0.052495 1 0 0 0 1 -0.014305 2

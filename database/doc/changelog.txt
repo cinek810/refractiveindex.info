@@ -1,0 +1,81 @@
+﻿2014-11-08
+  !!! LICENSE (LGPL) ADDED !!!
+  new data (thanks to Mikael Malmström, KTH Royal Institute of Technology, Stockholm, Sweden for suggesting data and Jan Kischkat, Humboldt University Berlin, Germany for providing numerical data)
+    main/SiO2/Kischkat.yml
+    main/Al2O3/Kischkat.yml
+    main/TiO2/Kischkat.yml
+    main/Si3N4/Kischkat.yml
+    main/AlN/Kischkat.yml
+  new data
+    main/MoO3/Lajaunie-alpha.yml
+	main/MoO3/Lajaunie-beta.yml
+	main/MoO3/Lajaunie-gamma.yml
+  updated data
+    glass/schott/misc/BOROFLOAT33.yml (thanks to Ulf Griesmann and SCHOTT North America Inc.)
+  bug fixes
+    catalog.yml - minor corrections for CH4 entries (k -> K;)
+	catalog.yml - missing and wrongly positioned "pages" key in "chloroform", "PMMA resists" and "Copolymer resists" books(thanks to Pavel Dmitriev)
+  format modifications
+	catalog.yml renamed to library.yml
+    library.yml:
+	  "books:" -> "content:"
+	  "pages:" -> "content:"
+	  "divider:" -> "DIVIDER:"
+  other
+	added a comment to all optical glass entries about refractive index and wavelength being relative to air (thanks to Rod Vance for the idea)
+
+2014-09-29
+  new data
+    main/H2O/Kedenburg.yml
+	main/D2O/Kedenburg.yml
+	main/CS2/Kedenburg.yml
+	organic/CHCl3 - chloroform/Kedenburg.yml
+	organic/CCl4 - carbon tetrachloride/Kedenburg.yml
+	organic/C7H8 - toluene/Kedenburg.yml
+	organic/C2H6O - ethanol/Kedenburg.yml
+	organic/C6H5NO2 - nitrobenzene/Kedenburg.yml
+	glass/SCHOTT-multipurpose/BOROFLOAT33.yml (thanks to Ulf Griesmann)
+	other/resists/Microchem 495.yml (thanks to Pavel Dmitriev)
+	other/resists/Microchem 950.yml (thanks to Pavel Dmitriev)
+	other/resists/Microchem 8.5 mEL.yml (thanks to Pavel Dmitriev)
+  updated data
+    glass/vitron/*.yml - absorption data added (thanks to Dr. Rolf Henkel)
+  bug fixes
+    removed main/Si/Palik.yml (thanks to Joel Murray and Ulf Griesmann)
+	removed a superfluous copy of the "AgGaSe2" directory in main/Al (thanks to Ulf Griesmann)
+	main/Tl3AsSe3/Ewbank-e.yml - added missing ":" after COMMENTS keyword (thanks to Pavel Dmitriev and Ulf Griesmann)
+	main/GaN/Barker-o.yml - removed extra symbols in the COMMENTS string (thanks to Pavel Dmitriev and Ulf Griesmann)
+  other
+    shelves renamed:
+		"Main"    -> "MAIN - simple inorganic materials"
+		"Organic" -> "ORGANIC - organic materials"
+		"Glass"   -> "GLASS - glasses"
+		"Other"   -> "OTHER - miscellaneous materials"
+
+2014-07-21
+  format modification for better following YAML specifications (thanks to Pavel Dmitriev, National Research University of Information Technologies, Mechanics and Optics, St. Petersburg, Russia for reporting a bug and for useful advices on format update)
+    'DATA: [n,k,nk]' and 'FORMULA: [1-9]' key/value pairs are replaced by '  - type: tabulated [n,k,nk]' and '  - type formula [1-9]' sub-enties of the 'DATA:' key respectively.
+  new data
+    main/GaAs/Skauli.yml
+  updated data
+    glass/vitron/*.yml (thanks to Dr. Rolf Henkel, VITRON Spezialwerkstoffe GmbH)
+
+2014-07-05
+  bug fixes (thanks to Joel Murray for reporting most of these bugs)
+    removed not used files with not relevant content (main/AlCu/AlCu.yml and main/AlSb/AlSb.yml)
+    corrected link to 'Hagemann 1974 - DESY report SR-74-7.pdf' in several files
+    removed extra newline symbols in the REFERENCES field in many files
+    replaced /n by /r/n everywhere (previously booth notations for newline were used inconsistently)
+
+2014-07-01
+  new data
+    ITO (In2O3-SnO2): data provided by Dr. Tobias König, University of Bayreuth, Germany
+      other/mixed crystals/In2O3-SnO2/Konig.yml
+      other/mixed crystals/In2O3-SnO2/Konig-EMA.yml
+    PVP (polyvinylpyrrolidone (C6H9NO)n): data provided by Tobias König
+      organic/(C6H9NO)n - polyvinylpyrrolidone/Konig.yml
+    Graphene: data provided by Jan-Willem Weber, Eindhoven Univ. of Technology, The Netherlands
+      main/C/Weber.yml
+  bug fixes
+    glass/ohara/S-BSL7.yml: error in dispersion formula fixed (thanks to Joel Murray)
+    main/Al: removed AgGaSe2 sub-folder (thanks to Joel Murray)
