@@ -3,7 +3,8 @@
 import sys
 
 if len(sys.argv)!=3:
-	sys.stderr.write("You have to specify exactly 2 arguments, Lambda min and Lambda max")
+	sys.stderr.write("You have to specify exactly 2 arguments, Lambda min and Lambda max\n")
+	sys.exit(1)
 
 xmin=float(sys.argv[1])
 xmax=float(sys.argv[2])

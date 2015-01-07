@@ -41,8 +41,14 @@ sys.stderr.write("comRange="+str(comRange))
 #Sampling definition:
 lambdas=np.linspace(comRange[0],comRange[1],100)
 
+
+#Change refractive index to epsilon
 matData1=getData(file1,lambdas)
+for i in range(0,len(matData1)):
+	matData1[i]=matData1[i]*matData1[i]
 matData2=getData(file2,lambdas)
+for i in range(0,len(matData2)):
+	matData2[i]=matData2[i]*matData2[i]
 
 R1=np.empty(shape=(0,len(lambdas)))
 I1=np.empty(shape=(0,len(lambdas)))
@@ -76,8 +82,8 @@ plt.plot(lambdas,matData2,'b--',label="Real(material2)")
 plt.legend()
 
 plt.subplot(212)
-plt.plot(lambdas,[ x.imag for x in matData1],'r-',label="Real(material1)")
-plt.plot(lambdas,[ x.imag for x in matData2],'b--',label="Real(material2)")
+plt.plot(lambdas,[ x.imag for x in matData1],'r-',label="Imag(material1)")
+plt.plot(lambdas,[ x.imag for x in matData2],'b--',label="Imag(material2)")
 plt.legend()
 
 #number of ticks
@@ -90,7 +96,7 @@ for lamb in np.linspace(min(lambdas),max(lambdas),TN):
 fTicks=np.linspace(0,1,TN)
 	
 plt.figure()
-plt.subplot(2,2,1)
+plt.subplot(2,3,1)
 plt.imshow(R1)
 plt.ylabel("f")
 plt.title(r'Re{$\epsilon_1$}')
@@ -136,7 +142,7 @@ plt.yticks(np.linspace(0,R1.shape[1],TN),fTicks)
 #END:generic settings for all plots
 
 #We can choose contour position with changing this line:
-plt.contour(I1,[0.])
+plt.contour(I1,[1.])
 
 plt.subplot(2,2,4)
 plt.imshow(I2)
@@ -151,8 +157,38 @@ plt.yticks(np.linspace(0,R1.shape[1],TN),fTicks)
 #END:generic settings for all plots
 
 #We can choose contour position with changing this line:
-plt.contour(I2,[0.])
+plt.contour(I2,[1.])
+
+
+
 
 plt.suptitle("f=1 means that everything is "+file1+",f=0 means everything"+file2)
 
+
+
+plt.figure()
+C=np.empty(shape=R1.shape,dtype="complex")
+Cr=np.empty(shape=R1.shape)
+Ci=np.empty(shape=R1.shape)
+for i in range(0,len(R1)):
+	C[i]=(R1[i]+1j*I1[i]) * (R2[i]+1j*I2[i])
+	Cr[i]=C[i].real
+	Ci[i]=C[i].imag
+
+
+plt.subplot(1,2,1)	
+plt.suptitle(r"$\epsilon_1 \cdot \epsilon_2$",size=20)
+plt.imshow(Cr,vmin=-50,vmax=50)
+plt.title("Real")
+plt.colorbar()
+plt.contour(Cr,[1],colors="w")
+
+plt.subplot(1,2,2)
+plt.title("Imag")
+plt.imshow(Ci,vmin=-50,vmax=50)
+plt.colorbar()
+plt.contour(Ci,[1],colors="w")
+
 plt.show()
+
+
