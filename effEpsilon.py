@@ -221,7 +221,10 @@ plt.title("Reflection for normal incidence")
 plt.xticks(np.linspace(0,R1.shape[0],TN),lambTicks)
 plt.yticks(np.linspace(0,R1.shape[1],TN),fTicks)
 
+minRef=min(Refle(Refle)
+print minRef
 
-plt.show()
+if minRef<0.001:
+	plt.show()
 
 
