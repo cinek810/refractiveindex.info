@@ -37,10 +37,9 @@ def searchRef(yamlFile,bookName,nmin,nmax):
 	materialData=allData["DATA"][0]
 
 	#dataRange - where we can check the data
-	try:	
-		dataRange=getRange(yamlFile)
-	except Error:
-		sys.stderr.write(e)
+	dataRange=getRange(yamlFile)
+	if dataRange[0]==0:
+		return []
 
 	#wavelengths to check for this material:
 	#HERE WE DEFINE THE SAMPLING
@@ -110,17 +109,20 @@ if __name__ == "__main__":
 			bookName="NoBookSet"
 			if(materials.keys()[0]=="content"):
 				bookName=materials["BOOK"]
-				smallRes=[]	
+				smallRes=dict()
 				for myFileIsIn in materials["content"]:
 					fileName=prefix+myFileIsIn["path"]
-					if bookName=="NoBookSet":
-						raise Exception("NoBookSet");
+#					if bookName=="NoBookSet":
+#						raise Exception("NoBookSet");
 					result=searchRef(fileName,bookName,float(sys.argv[1]),float(sys.argv[2]))	
 					if len(result)>0:
 						for oneTuple in result:
-							smallRes.append(oneTuple)
-						if len(resnames)==0 or resnames[-1]!=bookName:
-							resnames.append(bookName)
+							try:
+								smallRes[fileName].append(oneTuple)
+							except KeyError:
+								smallRes[fileName]=[]
+								smallRes[fileName].append(oneTuple)
+				
 				if len(smallRes)>0:
 					resrange.append(smallRes)
 
@@ -131,9 +133,9 @@ if __name__ == "__main__":
 	pickle.dump(resrange,f);
 	f.close();
 
-	f=open("temporary-names-res.sav",'w')
-	pickle.dump(resnames,f);
-	f.close();
+#	f=open("temporary-names-res.sav",'w')
+#	pickle.dump(resnames,f);
+#	f.close();
 
 
 	f=open("temporary-lims-res.sav",'w')

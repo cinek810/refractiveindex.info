@@ -75,15 +75,18 @@ for f in np.linspace(0,1,100):
 
 
 
-plt.figure()
+plt.figure("Materials:"+file1+" "+file2)
 plt.subplot(211)
-plt.plot(lambdas,matData1,'r-',label="Real(material1)")
-plt.plot(lambdas,matData2,'b--',label="Real(material2)")
+plt.plot(lambdas,matData1,'r-',label="Real("+file1+")")
+plt.plot(lambdas,matData2,'b--',label="Real("+file2+")")
+plt.xlabel("Wavelength [um]")
+plt.ylim(0,2)
 plt.legend()
 
 plt.subplot(212)
-plt.plot(lambdas,[ x.imag for x in matData1],'r-',label="Imag(material1)")
-plt.plot(lambdas,[ x.imag for x in matData2],'b--',label="Imag(material2)")
+plt.plot(lambdas,[ x.imag for x in matData1],'r-',label="Imag("+file1+")")
+plt.plot(lambdas,[ x.imag for x in matData2],'b--',label="Imag("+file2+")")
+plt.xlabel("Wavelength [um]")
 plt.legend()
 
 #number of ticks
@@ -95,16 +98,16 @@ for lamb in np.linspace(min(lambdas),max(lambdas),TN):
 
 fTicks=np.linspace(0,1,TN)
 	
-plt.figure()
-plt.subplot(2,3,1)
+plt.figure("Effective:"+file1+" "+file2)
+plt.subplot(2,2,1)
 plt.imshow(R1)
 plt.ylabel("f")
 plt.title(r'Re{$\epsilon_1$}')
 
 
 #START:generic settings for all plots
-plt.colorbar()
-plt.xticks(np.linspace(0,R1.shape[0],TN),lambTicks)
+#plt.xticks(np.linspace(0,R1.shape[0],TN),lambTicks)
+plt.xticks([])
 plt.yticks(np.linspace(0,R1.shape[1],TN),fTicks)
 #END:generic settings for all plots
 
@@ -120,8 +123,8 @@ plt.title(r'Re{$\epsilon_2$}')
 
 #START:generic settings for all plots
 plt.colorbar()
-plt.xticks(np.linspace(0,R1.shape[0],TN),lambTicks)
-plt.yticks(np.linspace(0,R1.shape[1],TN),fTicks)
+plt.xticks([])
+plt.yticks([])
 #END:generic settings for all plots
 
 
@@ -136,13 +139,15 @@ plt.ylabel("f")
 plt.title(r'Im{$\epsilon_1$}')
 
 #START:generic settings for all plots
-plt.colorbar()
 plt.xticks(np.linspace(0,R1.shape[0],TN),lambTicks)
 plt.yticks(np.linspace(0,R1.shape[1],TN),fTicks)
 #END:generic settings for all plots
 
 #We can choose contour position with changing this line:
 plt.contour(I1,[1.])
+
+
+
 
 plt.subplot(2,2,4)
 plt.imshow(I2)
@@ -153,7 +158,7 @@ plt.title(r'Im{$\epsilon_2$}')
 #START:generic settings for all plots
 plt.colorbar()
 plt.xticks(np.linspace(0,R1.shape[0],TN),lambTicks)
-plt.yticks(np.linspace(0,R1.shape[1],TN),fTicks)
+plt.yticks([])
 #END:generic settings for all plots
 
 #We can choose contour position with changing this line:
@@ -166,28 +171,56 @@ plt.suptitle("f=1 means that everything is "+file1+",f=0 means everything"+file2
 
 
 
-plt.figure()
-C=np.empty(shape=R1.shape,dtype="complex")
+plt.figure("eps1eps2:"+file1+" "+file2)
+#C=np.empty(shape=R1.shape,dtype="complex")
 Cr=np.empty(shape=R1.shape)
 Ci=np.empty(shape=R1.shape)
-for i in range(0,len(R1)):
-	C[i]=(R1[i]+1j*I1[i]) * (R2[i]+1j*I2[i])
-	Cr[i]=C[i].real
-	Ci[i]=C[i].imag
+for i in range(0,R1.shape[1]):
+	for j in range(0,R1.shape[0]):
+		C=(R1[i][j]+1j*I1[i][j]) * (R2[i][j]+1j*I2[i][j])
+		Cr[i][j]=C.real
+		Ci[i][j]=C.imag
 
 
-plt.subplot(1,2,1)	
-plt.suptitle(r"$\epsilon_1 \cdot \epsilon_2$",size=20)
-plt.imshow(Cr,vmin=-50,vmax=50)
+plt.subplot(2,2,1)	
+plt.title(r"$\epsilon_1 \cdot \epsilon_2$",size=20)
+plt.imshow(abs(1-Cr),vmin=-50,vmax=50)
 plt.title("Real")
-plt.colorbar()
+plt.colorbar(fraction=0.046, pad=0.04)
+plt.xticks(np.linspace(0,R1.shape[0],TN),lambTicks)
+plt.yticks(np.linspace(0,R1.shape[1],TN),fTicks)
 plt.contour(Cr,[1],colors="w")
 
-plt.subplot(1,2,2)
+plt.subplot(2,2,2)
 plt.title("Imag")
-plt.imshow(Ci,vmin=-50,vmax=50)
-plt.colorbar()
-plt.contour(Ci,[1],colors="w")
+plt.imshow(abs(Ci),vmin=-50,vmax=50)
+plt.colorbar(fraction=0.046, pad=0.04)
+plt.xticks(np.linspace(0,R1.shape[0],TN),lambTicks)
+plt.yticks(np.linspace(0,R1.shape[1],TN),fTicks)
+plt.contour(Ci,[0],colors="w")
+
+plt.subplot(2,2,3)
+
+plt.contour(Cr,[1],colors="b")
+plt.contour(Ci,[0],colors="r")
+plt.xticks(np.linspace(0,R1.shape[0],TN),lambTicks)
+plt.yticks(np.linspace(0,R1.shape[1],TN),fTicks)
+
+plt.subplot(2,2,4)
+#Calculated R for normal incidence
+Refle=np.empty(shape=R1.shape)
+n=np.empty(shape=R1.shape,dtype="complex")
+for i in range(0,R1.shape[1]):
+	for j in range(0,R1.shape[0]):
+		n=cmath.sqrt(R1[i][j]+1j*I1[i][j])
+		Refle[i][j]=abs((n-1)/(n+1))*abs((n-1)/(n+1))
+
+plt.imshow(Refle,vmin=0,vmax=1)	
+plt.colorbar(fraction=0.046, pad=0.04)
+plt.title("Reflection for normal incidence")
+plt.xticks(np.linspace(0,R1.shape[0],TN),lambTicks)
+plt.yticks(np.linspace(0,R1.shape[1],TN),fTicks)
+
 
 plt.show()
 
