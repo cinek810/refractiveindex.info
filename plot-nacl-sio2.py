@@ -7,16 +7,16 @@ import pylab as plt
 from getData import *
 
 import matplotlib
-matplotlib.rcParams.update({'font.size': 30})
+matplotlib.rcParams.update({'font.size': 30,'font.weight':'bold'})
 
 range=(7,10)
 lambdas=np.linspace(range[0],range[1],100)
 ag=getData("database/main/NaCl/Li.yml",lambdas);
 
 fig=plt.figure()
-plt.plot(lambdas,[ (x*x).real for x in ag ],'r-',label=r'Re($\varepsilon_{NaCl}$)',lw=4)
+plt.plot(lambdas,[ (x*x).real for x in ag ],'r-',label=r'Re',lw=4)
 
-plt.plot(lambdas,[ (x*x).imag for x in ag] ,'b-',label=r'Im($\varepsilon_{NaCl}$)',lw=4)
+plt.plot(lambdas,[ (x*x).imag for x in ag] ,'b--',label=r'Im',lw=4)
 #plt.plot(lambdasTiO2*1e3,[ (x*x).real for x in tio2],'g-',label=r'Real($\varepsilon_{TiO_{2}}$)')
 
 c=299792458
@@ -26,10 +26,11 @@ freq=freq/10e12
 
 #plt.plot(freq,[ (x*x).real for x in ag ],'r-',label=r'Real($\varepsilon_{Ag}$)')
 
-plt.legend(loc=1)
+plt.legend(loc=1,borderpad=0,frameon=False)
 #plt.title(r"Współczynnik przenikalnośći elektrycznej ($\varepsilon$)");
-plt.xlabel(r'długość fali [$\mu$m]')
+plt.xlabel(r'$\lambda$ [$\mu m$]')
 plt.xlim([7,10])
+plt.ylim([-4,8])
 plt.tight_layout()
 
 #plt.yscale('log')
@@ -42,9 +43,9 @@ plt.savefig("../phd/images/pml/nacl.png")
 lambdas=np.linspace(range[0],range[1],100)
 ag=getData("database/main/SiO2/Kischkat.yml",lambdas);
 fig=plt.figure()
-plt.plot(lambdas,[ (x*x).real for x in ag ],'r-',label=r'Re($\varepsilon_{SiO_2}$)',lw=4)
+plt.plot(lambdas,[ (x*x).real for x in ag ],'r-',label=r'Re',lw=4)
 
-plt.plot(lambdas,[ (x*x).imag for x in ag] ,'b-',label=r'Im($\varepsilon_{SiO_2}$)',lw=4)
+plt.plot(lambdas,[ (x*x).imag for x in ag] ,'b--',label=r'Im',lw=4)
 #plt.plot(lambdasTiO2*1e3,[ (x*x).real for x in tio2],'g-',label=r'Real($\varepsilon_{TiO_{2}}$)')
 
 c=299792458
@@ -54,10 +55,11 @@ freq=freq/10e12
 
 #plt.plot(freq,[ (x*x).real for x in ag ],'r-',label=r'Real($\varepsilon_{Ag}$)')
 
-plt.legend(loc=2)
+plt.legend(loc=2,borderpad=0,frameon=False)
 #plt.title(r"Współczynnik przenikalnośći elektrycznej ($\varepsilon$)");
-plt.xlabel(r'długość fali [$\mu$m]')
+plt.xlabel(r'$\lambda$ [$\mu m$]')
 plt.xlim([7,10])
+plt.ylim([-4,8])
 plt.tight_layout()
 
 #plt.yscale('log')

@@ -41,6 +41,10 @@ sys.stderr.write("comRange="+str(comRange))
 #Sampling definition:
 lambdas=np.linspace(comRange[0],comRange[1],100)
 
+#alternativelly hard specified
+
+lambdas=np.linspace(7,10,100)
+
 
 #Change refractive index to epsilon
 matData1=getData(file1,lambdas)
