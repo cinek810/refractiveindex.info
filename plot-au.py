@@ -14,9 +14,9 @@ lambdas=np.linspace(range[0],range[1],100)
 ag=getData("database/main/Au/Ordal.yml",lambdas);
 
 fig=plt.figure()
-plt.plot(lambdas,[ -(x*x).real for x in ag ],'r-',label=r'-Real($\varepsilon_{Au}$)')
+plt.plot(lambdas,[ -(x*x).real for x in ag ],'r-',label=r'-Re($\varepsilon_{Au}$)',lw=4)
 
-plt.plot(lambdas,[ (x*x).imag for x in ag] ,'b-',label=r'Imag($\varepsilon_{Au}$)')
+plt.plot(lambdas,[ (x*x).imag for x in ag] ,'b-',label=r'Im($\varepsilon_{Au}$)',lw=4)
 #plt.plot(lambdasTiO2*1e3,[ (x*x).real for x in tio2],'g-',label=r'Real($\varepsilon_{TiO_{2}}$)')
 
 c=299792458

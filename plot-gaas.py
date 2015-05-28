@@ -15,7 +15,7 @@ lambdas=np.linspace(range[0],range[1],100)
 ag=getData("database/main/GaAs/Skauli.yml",lambdas);
 
 fig=plt.figure()
-plt.plot(lambdas,[ (x*x).real for x in ag ],'r-',label=r'Real($\varepsilon_{GaAs}$)')
+plt.plot(lambdas,[ (x*x).real for x in ag ],'r-',label=r'Re($\varepsilon_{GaAs}$)',lw=4)
 
 #plt.plot(lambdas,[ (x*x).imag for x in ag] ,'b-',label=r'Imag($\varepsilon_{Ag}$)')
 #plt.plot(lambdasTiO2*1e3,[ (x*x).real for x in tio2],'g-',label=r'Real($\varepsilon_{TiO_{2}}$)')

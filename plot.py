@@ -1,4 +1,7 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
 
 import yaml
 from parse import *
@@ -36,39 +39,57 @@ range=(0.280,0.790)
 lambdasAg=np.linspace(range[0],range[1],100)
 ag=getData("database/main/Ag/Johnson.yml",lambdasAg);
 #print ag
-lambdasTiO2=np.linspace(0.430,0.79)
-tio2=getData("database/main/TiO2/Devore-o.yml",lambdasTiO2);
+lambdasTiO2=np.linspace(0.280,0.790)
+#tio2=getData("database/main/TiO2/Devore-o.yml",lambdasTiO2);
+tio2=getData("database/main/SiO2/Malitson.yml",lambdasTiO2);
+
+
+
+fig=plt.figure()
+plt.plot(lambdasTiO2*1e3,[ x.real for x in tio2],'g-',label=r'Real($n_{SiO_{2}}$)')
+
+
+plt.legend()
+plt.title(r"Współczynnik załamania $SiO_2$ ($n$)");
+plt.ylabel('')
+plt.xlabel('wavelength [nm]')
+plt.xlim([280,750])
+
+plt.savefig("../phd/images/sio2n.png")
 
 
 fig=plt.figure()
 plt.plot(lambdasAg*1e3,[ x.real for x in ag ],'r-',label=r'Real($n_{Ag}$)')
 
 plt.plot(lambdasAg*1e3,[ x.imag for x in ag] ,'b-',label=r'Imag($n_{Ag}$)')
-plt.plot(lambdasTiO2*1e3,[ x.real for x in tio2],'g-',label=r'Real($n_{TiO_{2}}$)')
+#plt.plot(lambdasTiO2*1e3,[ x.real for x in tio2],'g-',label=r'Real($n_{TiO_{2}}$)')
 
 
 plt.legend()
-plt.title('Refractive index ($n$)');
+plt.title(r"Współczynnik załamania srebra ($n$)");
 plt.ylabel('')
 plt.xlabel('wavelength [nm]')
-plt.xlim([200,750])
+plt.xlim([280,750])
 plt.ylim([0,3])
 
-plt.savefig("../phd/images/agtio2n.png")
+plt.savefig("../phd/images/agn.png")
 
 fig=plt.figure()
-plt.plot(lambdasAg*1e3,[ x.real for x in np.sqrt(ag) ],'r-',label=r'Real($n_{Ag}$)')
+plt.plot(lambdasAg*1e3,[ (x*x).real for x in ag ],'r-',label=r'Real($\varepsilon_{Ag}$)')
 
-plt.plot(lambdasAg*1e3,[ x.imag for x in np.sqrt(ag)] ,'b-',label=r'Imag($n_{Ag}$)')
-plt.plot(lambdasTiO2*1e3,[ x.real for x in np.sqrt(tio2)],'g-',label=r'Real($n_{TiO_{2}}$)')
+plt.plot(lambdasAg*1e3,[ (x*x).imag for x in ag] ,'b-',label=r'Imag($\varepsilon_{Ag}$)')
+#plt.plot(lambdasTiO2*1e3,[ (x*x).real for x in tio2],'g-',label=r'Real($\varepsilon_{TiO_{2}}$)')
 
 
 plt.legend()
-plt.title('Electric permittivity ($n$)');
+plt.title(r"Współczynnik przenikalnośći elektrycznej ($\varepsilon$)");
 plt.ylabel('')
 plt.xlabel('wavelength [nm]')
 plt.xlim([380,750])
-plt.ylim([0,2])
+#plt.ylim([-1.5,1.5])
 plt.savefig("../phd/images/agtio2eps.png")
 
-#plt.show()
+########
+#GaAs do rozdzialu o THz
+
+plt.show()
